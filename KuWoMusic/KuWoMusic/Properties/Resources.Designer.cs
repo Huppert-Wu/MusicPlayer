@@ -73,6 +73,16 @@ namespace KuWoMusic.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap bg {
+            get {
+                object obj = ResourceManager.GetObject("bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap dyn_detail_pause {
             get {
                 object obj = ResourceManager.GetObject("dyn_detail_pause", resourceCulture);
@@ -146,6 +156,76 @@ namespace KuWoMusic.Properties {
         internal static System.Drawing.Bitmap volume_x {
             get {
                 object obj = ResourceManager.GetObject("volume_x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 大壮_我们不一样 {
+            get {
+                object obj = ResourceManager.GetObject("大壮-我们不一样", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 校长_张驰__带你去旅行 {
+            get {
+                object obj = ResourceManager.GetObject("校长[张驰]-带你去旅行", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 薛之谦_演员 {
+            get {
+                object obj = ResourceManager.GetObject("薛之谦-演员", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 金南玲_逆流成河 {
+            get {
+                object obj = ResourceManager.GetObject("金南玲-逆流成河", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 陈一发儿_童话镇 {
+            get {
+                object obj = ResourceManager.GetObject("陈一发儿-童话镇", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 陈一发儿_童话镇2 {
+            get {
+                object obj = ResourceManager.GetObject("陈一发儿-童话镇2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 音阙诗听_红昭愿 {
+            get {
+                object obj = ResourceManager.GetObject("音阙诗听-红昭愿", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

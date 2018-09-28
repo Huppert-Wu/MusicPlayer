@@ -11,6 +11,8 @@ using System.IO;
 using System.Media;
 using System.Timers;
 using System.Threading;
+using System.Drawing;
+
 namespace KuWoMusic
 {
     public partial class MusicPlayer : Form
@@ -140,6 +142,13 @@ namespace KuWoMusic
             //初始化歌词类
             lyricf = new LyricFIles();
             lyricf.LoadLyric(lyricname);
+            //改背景图片
+            Loadbgimage(lyricname);
+        }
+        public void Loadbgimage(string musicname)
+        {
+            string filename = "./bg/" + musicname + ".jpg";
+            this.BackgroundImage = Image.FromFile(filename);
         }
         //播放下一曲
         public void TimePlay()

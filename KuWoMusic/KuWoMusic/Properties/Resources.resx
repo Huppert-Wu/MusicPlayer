@@ -118,23 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dyn_detail_pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dyn_detail_pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="beforeplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\beforeplay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="nextplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nextplay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dyn_detail_pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dyn_detail_pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="music list" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\music list1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="volume" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\volume.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="volume_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\volume-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -144,5 +138,35 @@
   </data>
   <data name="volume_x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\volume-x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beforeplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\beforeplay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="volume" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\volume.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\bg\bg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="陈一发儿-童话镇" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\bg\陈一发儿-童话镇.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="陈一发儿-童话镇2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\bg\陈一发儿-童话镇2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="大壮-我们不一样" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\bg\大壮-我们不一样.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="金南玲-逆流成河" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\bg\金南玲-逆流成河.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="校长[张驰]-带你去旅行" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\bg\校长[张驰]-带你去旅行.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="薛之谦-演员" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\bg\薛之谦-演员.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="音阙诗听-红昭愿" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\bg\音阙诗听-红昭愿.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

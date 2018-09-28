@@ -135,6 +135,30 @@
   <ItemGroup>
     <None Include="Resources\volume.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bg\bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bg\陈一发儿-童话镇.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bg\陈一发儿-童话镇2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bg\大壮-我们不一样.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bg\金南玲-逆流成河.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bg\校长[张驰]-带你去旅行.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bg\薛之谦-演员.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\bg\音阙诗听-红昭愿.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
