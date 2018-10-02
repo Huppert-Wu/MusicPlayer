@@ -22,19 +22,28 @@ namespace KuWoMusic
             InitializeComponent();
         }
         List<string> Songlists = new List<string>();//存储音乐文件的路径
-
+        List<Label> Lablelists = new List<Label>();
+        private Point mousepoint;//捕捉鼠标，移动form
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
         LyricFIles lyricf;
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            //画画
+            this.DoubleBuffered = true;
+            this.Paint += new PaintEventHandler(Form1_Paint);
+
             //初始化歌曲列表
             DirectoryInfo dirinfo = new DirectoryInfo("./song/");
             FileInfo[] filelist = dirinfo.GetFiles();
             string filefullname;
+            //新建播放列表
+            //WMPLib.IWMPPlaylist playlist = axWindowsMediaPlayer1.playlistCollection.newPlaylist("musicplaylist");
+            //WMPLib.IWMPMedia media;
             for (int i = 0; i < filelist.Length; i++)
             {
                 if (!lstMusiclist.Items.Contains(Path.GetFileName(filelist[i].FullName)))
@@ -42,9 +51,25 @@ namespace KuWoMusic
                     filefullname = filelist[i].FullName;
                     lstMusiclist.Items.Add(Path.GetFileName(filefullname));
                     Songlists.Add(filefullname);
-                    axWindowsMediaPlayer1.currentPlaylist.appendItem(axWindowsMediaPlayer1.newMedia(filefullname));
+
+                    //media = axWindowsMediaPlayer1.newMedia(filefullname);
+                    //playlist.appendItem(media);
                 }
             }
+            for (int i = 0; i < 7; i++)
+            {
+                Label label = new Label();
+                label.Location = new Point(30, 55 + i * 45);
+                label.Size = new Size(900, 50);
+                label.BackColor = Color.Transparent;
+                label.ForeColor = Color.White;
+                label.Font = new Font("微软雅黑", 15);
+
+                Lablelists.Add(label);
+                this.Controls.Add(label);
+            }
+            //axWindowsMediaPlayer1.currentPlaylist = playlist;
+
             //默认播放列表第一首歌
             if (lstMusiclist.Items != null)
             {
@@ -56,13 +81,14 @@ namespace KuWoMusic
                 //error
                 ;
             }
-            //循环模式
-            axWindowsMediaPlayer1.settings.setMode("loop", true);
+            //循环模式为列表循环
+            playmode = 0;
+
             MusicPlay(Songlists[lstMusiclist.SelectedIndex]);
 
             isPlay = true;
             axWindowsMediaPlayer1.Ctlcontrols.stop();//等待播放
-            picPlay.BackgroundImage = Properties.Resources.play;
+            picPlay.BackgroundImage = Properties.Resources.play_button;
             isPlay = false;
             //初始化track volume
             trkVolume.Value = axWindowsMediaPlayer1.settings.volume;
@@ -86,7 +112,7 @@ namespace KuWoMusic
                 //播放歌词
                 timLyric.Enabled = true;
                 timProcess.Enabled = true;
-                picPlay.BackgroundImage = Properties.Resources.dyn_detail_pause;
+                picPlay.BackgroundImage = Properties.Resources.pause;
             }
             else//暂停歌曲
             {
@@ -95,7 +121,7 @@ namespace KuWoMusic
                 timLyric.Enabled = false;
                 //暂停播放歌词
 
-                picPlay.BackgroundImage = Properties.Resources.play;
+                picPlay.BackgroundImage = Properties.Resources.play_button;
             }
         }
 
@@ -134,7 +160,7 @@ namespace KuWoMusic
             axWindowsMediaPlayer1.URL = songpath;
             axWindowsMediaPlayer1.Ctlcontrols.play();
             //设置播放/暂停的图片
-            picPlay.BackgroundImage = Properties.Resources.dyn_detail_pause;
+            picPlay.BackgroundImage = Properties.Resources.pause;
             //从文件路径获取歌词名称
             string[] lyricpaths = songpath.Split('\\', '.');
             string lyricname = lyricpaths[lyricpaths.Length - 2];
@@ -142,6 +168,8 @@ namespace KuWoMusic
             //初始化歌词类
             lyricf = new LyricFIles();
             lyricf.LoadLyric(lyricname);
+            //初始化歌词显示label
+
             //改背景图片
             Loadbgimage(lyricname);
         }
@@ -180,24 +208,48 @@ namespace KuWoMusic
         public void LyricPlay()
         {
             //以当下时间获取此时间的歌词
-            string lyric = lyricf.Firstlyrics(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);
-
+            string[] lyric = lyricf.Firstlyrics(axWindowsMediaPlayer1.Ctlcontrols.currentPosition);
+            if (lyric == null)
+                return;
             //显示歌词
-            if (lyric != null)
+            for (int i = 0; i < 7; i++)
             {
+                Lablelists[i].Text = lyric[i];
+                Lablelists[i].ForeColor = Color.White;
+                if (Convert.ToInt32(lyric[7])==i+1)
+                {
+                    Lablelists[i].ForeColor = Color.Red;
+                }
 
-                lblLyric.Text = lyric;
             }
+
+
+            //lblLyric.Text = lyric[3];
+
         }
         private void picNextmusic_Click(object sender, EventArgs e)
         {
 
-            //下一曲播放
             int index = lstMusiclist.SelectedIndex;
-            index++;
-            if (index == lstMusiclist.Items.Count)
-            {
-                index = 0;
+            //根据播放模式播放
+            if (playmode == 0)
+            {//循环播放下一曲
+
+                index++;
+                if (index == lstMusiclist.Items.Count)
+                {
+                    index = 0;
+                }
+            }
+            else if (playmode == 1)
+            {//随机播放下一曲
+                Random random = new Random();
+                random.Next();
+                index = random.Next() % lstMusiclist.Items.Count;
+                //随机的下一首不能与当前一样
+                if (index == lstMusiclist.SelectedIndex)
+                    index++;
+
             }
             lstMusiclist.SelectedIndex = index;
             MusicPlay(Songlists[lstMusiclist.SelectedIndex]);
@@ -222,12 +274,27 @@ namespace KuWoMusic
         //播放上一曲
         private void picBefore_Click(object sender, EventArgs e)
         {
-            //上一曲播放
+
             int index = lstMusiclist.SelectedIndex;
-            index--;
-            if (index < 0)
-            {
-                index = lstMusiclist.Items.Count - 1;
+            //根据播放模式播放
+            if (playmode == 0)
+            {//循环播放下一曲
+
+                index--;
+                if (index < 0)
+                {
+                    index = lstMusiclist.Items.Count - 1;
+                }
+            }
+            else if (playmode == 1)
+            {//随机播放下一曲
+                Random random = new Random();
+                random.Next();
+                index = random.Next() % lstMusiclist.Items.Count;
+                //随机的下一首不能与当前一样
+                if (index == lstMusiclist.SelectedIndex)
+                    index++;
+
             }
             lstMusiclist.SelectedIndex = index;
             MusicPlay(Songlists[lstMusiclist.SelectedIndex]);
@@ -254,10 +321,14 @@ namespace KuWoMusic
         private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
 
-            if (e.newState == 8)
+            if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsMediaEnded)
             {
                 //下一曲播放
-                MusicPlay(Songlists[lstMusiclist.SelectedIndex]);
+                //不能在事件里mediaplayer.play ？？？
+                //this.axWindowsMediaPlayer1.currentPlaylist.clear();
+                //this.axWindowsMediaPlayer1.currentPlaylist.appendItem(this.axWindowsMediaPlayer1.newMedia(Songlists[lstMusiclist.SelectedIndex]));
+                //axWindowsMediaPlayer1.settings.setMode("loop", true);
+                timPlay.Enabled = true;
 
             }
 
@@ -272,7 +343,7 @@ namespace KuWoMusic
             //重新开始
 
             axWindowsMediaPlayer1.Ctlcontrols.play();
-            picPlay.BackgroundImage = Properties.Resources.dyn_detail_pause;
+            picPlay.BackgroundImage = Properties.Resources.pause;
         }
 
         private void axWindowsMediaPlayer1_EndOfStream(object sender, AxWMPLib._WMPOCXEvents_EndOfStreamEvent e)
@@ -301,7 +372,7 @@ namespace KuWoMusic
                 trkVolume.Value = 0;
                 axWindowsMediaPlayer1.settings.volume = trkVolume.Value;
                 //设置背景图片
-                picVolume.BackgroundImage = Properties.Resources.volume_x;
+                picVolume.BackgroundImage = Properties.Resources.mute;
             }
             else
             {
@@ -317,13 +388,157 @@ namespace KuWoMusic
         }
         public void VolumeImage(int volume)
         {
-            if (trkVolume.Value > 80)
-                picVolume.BackgroundImage = Properties.Resources.volume_2;
-            else if (trkVolume.Value > 0)
-                picVolume.BackgroundImage = Properties.Resources.volume_1;
+            if (trkVolume.Value > 0)
+                picVolume.BackgroundImage = Properties.Resources.volume;
+
             else
             {
-                picVolume.BackgroundImage = Properties.Resources.volume;
+                picVolume.BackgroundImage = Properties.Resources.mute;
+            }
+        }
+
+        private void timPlay_Tick(object sender, EventArgs e)
+        {
+            timPlay.Enabled = false;
+            int index = lstMusiclist.SelectedIndex;
+            //根据播放模式播放
+            if (playmode == 0)
+            {//循环播放下一曲
+
+                index++;
+                if (index == lstMusiclist.Items.Count)
+                {
+                    index = 0;
+                }
+                lstMusiclist.SelectedIndex = index;
+            }
+            else if (playmode == 1)
+            {//随机播放下一曲
+                Random random = new Random();
+                random.Next();
+                lstMusiclist.SelectedIndex = random.Next() % lstMusiclist.Items.Count;
+            }
+
+            MusicPlay(Songlists[lstMusiclist.SelectedIndex]);
+
+        }
+        int playmode;
+        private void picPlaymode_Click(object sender, EventArgs e)
+        {
+            playmode = (playmode + 1) % 2;
+            if (playmode == 0)
+            {
+                picPlaymode.BackgroundImage = Properties.Resources.repeat;
+            }
+            else if (playmode == 1)
+            {
+                picPlaymode.BackgroundImage = Properties.Resources.shuffle;
+            }
+        }
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            //添加timer 不断刷新 interval=10
+
+
+        }
+
+        private void MusicPlayer_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void MusicPlayer_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)//按下左键
+            {
+                mousepoint.X = e.X;
+                mousepoint.Y = e.Y;
+            }
+        }
+
+        private void MusicPlayer_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                Top = MousePosition.Y - mousepoint.Y;
+                Left = MousePosition.X - mousepoint.X;
+            }
+        }
+
+        private void picMini_MouseEnter(object sender, EventArgs e)
+        {
+            picMini.BackColor = Color.FromArgb(50, 200, 255, 255);
+        }
+
+        private void picMini_MouseLeave(object sender, EventArgs e)
+        {
+            picMini.BackColor = Color.FromArgb(0, 255, 255, 255);
+        }
+
+        private void picClose_MouseEnter(object sender, EventArgs e)
+        {
+            picClose.BackColor = Color.Red;
+        }
+
+        private void picClose_MouseLeave(object sender, EventArgs e)
+        {
+            picClose.BackColor = Color.Transparent;
+        }
+
+        private void 打开播放器ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible = true;
+            this.WindowState = FormWindowState.Normal;
+            this.Show();
+        }
+
+        private void MusicPlayer_Resize(object sender, EventArgs e)
+        {
+            if(this.WindowState == FormWindowState.Minimized)
+            { //最小化窗口时
+                this.Visible = false;
+                this.ntiIcon.Visible = true;
+            }
+        }
+
+        private void picMini_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void picClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void ntiIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Visible = true;
+            this.WindowState = FormWindowState.Normal;
+            this.Show();
+        }
+
+        private void MusicPlayer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 32)
+            {//捕获空格键，播放暂停
+                if (isPlay)
+                {
+                    axWindowsMediaPlayer1.Ctlcontrols.pause();
+                    isPlay = !isPlay;
+                    picPlay.BackgroundImage = Properties.Resources.play_button;
+                }
+                else
+                {
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                    isPlay = !isPlay;
+                    picPlay.BackgroundImage = Properties.Resources.pause;
+
+                }
             }
         }
     }

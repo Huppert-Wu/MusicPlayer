@@ -9,30 +9,63 @@ namespace KuWoMusic
     class LyricFIles
     {
         public List<Lyric> lstLyric = new List<Lyric>();
-        
-        public string  Firstlyrics(double Curtime)
+        public string[] Firstlyrics(double Curtime)
         {
+            int index = 0;
+            int sentinel = 4;
             double time;
-            string lyrics=null;
+            //保存7行代码返回
+            string[] lyrics = new string[8];
+            string[] newlyric = new string[8];
+            newlyric[0] = newlyric[1] = newlyric[2] = newlyric[3] = null;
+            for (int count = 0; count < 7; count++)
+            {
+                lyrics[count] = lstLyric[count].Strlyric;
+            }
 
-            //当前时间，以double表示
-            foreach(Lyric lyric in lstLyric)
+            foreach (Lyric lyric in lstLyric)
             {
                 //全部化成double计算
                 //如果大于等于就返回歌词
-                time = lyric.Minute*60 + lyric.Second + lyric.Mmsec*0.01;
-                if (time <= Curtime)
+                time = lyric.Minute * 60 + lyric.Second + lyric.Mmsec * 0.01;
+                if (lyric != null)
                 {
-                    //返回上一条歌词
-                    lyrics = lyric.Strlyric;
-                    //lstLyric.Remove(lyric);
-
-
+                    if (time <= Curtime)
+                    {
+                        newlyric[0] = newlyric[1];
+                        newlyric[1] = newlyric[2];
+                        newlyric[2] = newlyric[3];
+                        newlyric[3] = lyric.Strlyric;
+                        index++;
+                    }
+                    else
+                    {
+                        if(index <= 4)
+                        {
+                            //返回最初7行歌词
+                            lyrics[7] = index.ToString();
+                            return lyrics;
+                        }
+                        else
+                        {
+                            newlyric[sentinel++] = lyric.Strlyric;
+                            if(sentinel == 7)
+                            {
+                                newlyric[7] = "4";
+                                return newlyric;
+                            }
+                        }
+                    }
                 }
-                else
-                    return lyrics;
+
             }
-            return null;
+            if (newlyric[0] != null)
+            {
+                newlyric[7] = "4";
+                return newlyric;
+            }
+            else
+                return lyrics;
         }
         public void LoadLyric(string lyricname)
         {
@@ -43,46 +76,50 @@ namespace KuWoMusic
             FileStream fs = new FileStream("./Lyric/" + lyricname + ".lrc", FileMode.Open);
             StreamReader sr = new StreamReader(fs, encode);
 
-            
+
             //解析歌词文件
             string line;
+            int lyriccount = 0;
             while ((line = sr.ReadLine()) != null)
             {
                 //将歌词信息，时间片段加入list
                 if (line == "")
                     continue;
-                string []lyrictime = LyricParse(line);
-                
-                Lyric lyric = new Lyric(int.Parse(lyrictime[1]), int.Parse(lyrictime[2]), int.Parse(lyrictime[3]), lyrictime[4]); //可能自动属性的锅
-                lstLyric.Add(lyric);
+                string[] lyrictime = LyricParse(line);
 
+                Lyric lyric = new Lyric(int.Parse(lyrictime[1]), int.Parse(lyrictime[2]), int.Parse(lyrictime[3]), lyrictime[4]);
+                lstLyric.Add(lyric);
+                lyriccount++;
             }
             sr.Close();
             fs.Close();
-            
+
 
         }
         public string[] LyricParse(string lyricLine)
         {
-            string[] lyrics =  lyricLine.Split('[', ':', '.', ']');
+            string[] lyrics = lyricLine.Split('[', ':', '.', ']');
             return lyrics;
         }
 
-        //public string[] 
 
     }
     class Lyric
     {
         //分钟 秒 毫秒
-        int mmsecs=0, minutes=0, seconds=0;
-        string strlyrics=null;
-        public Lyric(int minute, int second,int mmsecs, string strlyric)
+        int mmsecs = 0, minutes = 0, seconds = 0;
+        string strlyrics = null;
+        //记录歌词条数
+
+        public Lyric(int minute, int second, int mmsecs, string strlyric)
         {
+
             this.mmsecs = mmsecs;
             this.minutes = minute;
             this.seconds = second;
             this.strlyrics = strlyric;
         }
+
         public int Mmsec
         {
             get { return this.mmsecs; }
@@ -103,7 +140,7 @@ namespace KuWoMusic
             get { return this.strlyrics; }
             set { value = this.strlyrics; }
         }
-        
+
     }
 
 }

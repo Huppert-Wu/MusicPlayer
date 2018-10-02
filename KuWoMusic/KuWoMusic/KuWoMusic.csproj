@@ -133,9 +133,6 @@
     <None Include="Resources\volume-1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\volume.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="bin\Debug\bg\bg.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +155,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\bg\音阙诗听-红昭愿.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\equalizer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fast-forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\headphones.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\musical-note.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rewind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shuffle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volume.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
