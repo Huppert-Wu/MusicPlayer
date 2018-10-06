@@ -136,7 +136,7 @@ namespace trackbartest02
                 using (Graphics g = Graphics.FromImage(bit))
                 {
                     this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-                    //this.BackColor = Color.FromArgb(1, 0, 254, 254);//transparent的argb值
+                    //this.BackColor = Color.FromArgb(0, 255, 255, 255);//transparent的argb值
                     this.BackColor = Color.White;
                     /*
                     using (SolidBrush backBrush = new SolidBrush(Color.Transparent))

@@ -30,7 +30,8 @@ namespace urltest01
                 string songaddr = Parsemp3url(songid);
                 string jpgaddr = Parsejpgurl(songid);
                 string lyrics = Parselyricurl(songid);
-                Songs song = new Songs(songaddr, lyrics, jpgaddr);
+                string songname = Parsenameurl(songid);
+                Songs song = new Songs(songaddr, lyrics, jpgaddr, songname);
                 SongInfo.Add(songid, song);
             }
         }
@@ -120,6 +121,22 @@ namespace urltest01
             lyrictxt = match.Groups[1].ToString();
 
             return lyrictxt;
+        }
+        /// <summary>
+        /// 返回歌名
+        /// </summary>
+        /// <param name="songid"></param>
+        /// <returns></returns>
+        private string Parsenameurl(int songid)
+        {
+            string url = "https://api.imjad.cn/cloudmusic/?type=detail&id=" + songid.ToString();
+            string pagehtml = Getwebpage(url);
+            string pattern = "name\":\"(.*?)\",\"id";//jpg的正则表达式
+            string songname;
+            Regex regex = new Regex(pattern);
+            Match match = regex.Match(pagehtml);
+            songname = match.Groups[1].ToString();
+            return songname;
         }
 
         private string Getwebpage(string url)

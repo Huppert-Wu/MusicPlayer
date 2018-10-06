@@ -185,10 +185,7 @@ namespace KuWoMusic
             }
             else
             {
-                string song = webSonglist.SongInfo[int.Parse(songpath)].Song;
-                string lyric = webSonglist.SongInfo[int.Parse(songpath)].Lyrics;
-                string backimg = webSonglist.SongInfo[int.Parse(songpath)].Backimg;
-                songlyric = new Songs(song, lyric, backimg);
+                songlyric = webSonglist.SongInfo[int.Parse(songpath)];
                 songlyric.Loadlyric();
                 Loadwebimg(int.Parse(songpath));
             }
@@ -312,6 +309,8 @@ namespace KuWoMusic
                 lstMusiclist.Show();
                 butOffline.Show();
                 butOnline.Show();
+                lblsonglistid.Show();
+                txtSongid.Show();
                 isShow = true;
             }
             else
@@ -319,6 +318,8 @@ namespace KuWoMusic
                 lstMusiclist.Hide();
                 butOnline.Hide();
                 butOffline.Hide();
+                lblsonglistid.Hide();
+                txtSongid.Hide();
                 isShow = false;
             }
         }
@@ -656,7 +657,8 @@ namespace KuWoMusic
         {
             //新建在线播放音乐列表，加载时间特别长，每一首歌都要请求网页
             //我的网易云歌单
-            webSonglist = new WebSonglist("https://api.imjad.cn/cloudmusic/?type=playlist&id=2455268231");
+            string listid = "https://api.imjad.cn/cloudmusic/?type=playlist&id=" + txtSongid.Text;
+            webSonglist = new WebSonglist(listid);
 
 
 
@@ -665,7 +667,7 @@ namespace KuWoMusic
 
             foreach(int songid in webSonglist.SongIds)
             {
-                lstMusiclist.Items.Add(songid);
+                lstMusiclist.Items.Add(webSonglist.SongInfo[songid].Name);
                 Songlists.Add(songid.ToString());
             }
             if(lstMusiclist != null)

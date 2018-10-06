@@ -54,6 +54,8 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.butOffline = new System.Windows.Forms.Button();
             this.butOnline = new System.Windows.Forms.Button();
+            this.lblsonglistid = new System.Windows.Forms.Label();
+            this.txtSongid = new System.Windows.Forms.TextBox();
             this.pnlControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlaymode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVolume)).BeginInit();
@@ -228,14 +230,15 @@
             // 
             // lstMusiclist
             // 
-            this.lstMusiclist.BackColor = System.Drawing.Color.LightGray;
+            this.lstMusiclist.BackColor = System.Drawing.SystemColors.Control;
             this.lstMusiclist.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstMusiclist.Font = new System.Drawing.Font("微软雅黑", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lstMusiclist.ForeColor = System.Drawing.Color.Red;
             this.lstMusiclist.FormattingEnabled = true;
-            this.lstMusiclist.ItemHeight = 15;
-            this.lstMusiclist.Location = new System.Drawing.Point(757, 276);
+            this.lstMusiclist.ItemHeight = 24;
+            this.lstMusiclist.Location = new System.Drawing.Point(716, 307);
             this.lstMusiclist.Name = "lstMusiclist";
-            this.lstMusiclist.Size = new System.Drawing.Size(202, 255);
+            this.lstMusiclist.Size = new System.Drawing.Size(244, 240);
             this.lstMusiclist.TabIndex = 2;
             this.lstMusiclist.Visible = false;
             this.lstMusiclist.SelectedIndexChanged += new System.EventHandler(this.lstMusiclist_SelectedIndexChanged);
@@ -323,10 +326,10 @@
             // 
             // butOffline
             // 
-            this.butOffline.BackColor = System.Drawing.Color.LightGray;
-            this.butOffline.Location = new System.Drawing.Point(757, 249);
+            this.butOffline.BackColor = System.Drawing.SystemColors.Control;
+            this.butOffline.Location = new System.Drawing.Point(716, 283);
             this.butOffline.Name = "butOffline";
-            this.butOffline.Size = new System.Drawing.Size(100, 29);
+            this.butOffline.Size = new System.Drawing.Size(123, 29);
             this.butOffline.TabIndex = 4;
             this.butOffline.Text = "本地歌曲";
             this.butOffline.UseVisualStyleBackColor = false;
@@ -335,15 +338,35 @@
             // 
             // butOnline
             // 
-            this.butOnline.BackColor = System.Drawing.Color.LightGray;
-            this.butOnline.Location = new System.Drawing.Point(856, 249);
+            this.butOnline.BackColor = System.Drawing.SystemColors.Control;
+            this.butOnline.Location = new System.Drawing.Point(839, 283);
             this.butOnline.Name = "butOnline";
-            this.butOnline.Size = new System.Drawing.Size(104, 29);
+            this.butOnline.Size = new System.Drawing.Size(123, 29);
             this.butOnline.TabIndex = 5;
             this.butOnline.Text = "在线听歌";
             this.butOnline.UseVisualStyleBackColor = false;
             this.butOnline.Visible = false;
             this.butOnline.Click += new System.EventHandler(this.butOnline_Click);
+            // 
+            // lblsonglistid
+            // 
+            this.lblsonglistid.Font = new System.Drawing.Font("微软雅黑", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblsonglistid.Location = new System.Drawing.Point(713, 261);
+            this.lblsonglistid.Name = "lblsonglistid";
+            this.lblsonglistid.Size = new System.Drawing.Size(126, 23);
+            this.lblsonglistid.TabIndex = 6;
+            this.lblsonglistid.Text = "网易云音乐歌单:";
+            this.lblsonglistid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblsonglistid.Visible = false;
+            // 
+            // txtSongid
+            // 
+            this.txtSongid.Location = new System.Drawing.Point(839, 259);
+            this.txtSongid.Name = "txtSongid";
+            this.txtSongid.Size = new System.Drawing.Size(121, 25);
+            this.txtSongid.TabIndex = 7;
+            this.txtSongid.Text = "2455268231";
+            this.txtSongid.Visible = false;
             // 
             // MusicPlayer
             // 
@@ -353,6 +376,8 @@
             this.BackgroundImage = global::KuWoMusic.Properties.Resources.bg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(960, 600);
+            this.Controls.Add(this.txtSongid);
+            this.Controls.Add(this.lblsonglistid);
             this.Controls.Add(this.butOnline);
             this.Controls.Add(this.butOffline);
             this.Controls.Add(this.picClose);
@@ -385,6 +410,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picClose)).EndInit();
             this.cotMenustrip.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -414,6 +440,8 @@
         private System.Windows.Forms.Label lblCurtime;
         private System.Windows.Forms.Button butOffline;
         private System.Windows.Forms.Button butOnline;
+        private System.Windows.Forms.Label lblsonglistid;
+        private System.Windows.Forms.TextBox txtSongid;
     }
 }
 

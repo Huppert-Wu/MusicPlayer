@@ -13,25 +13,34 @@ namespace urltest01
         public string Song { get; set; }
         public string Lyrics { get; set; }
         public string Backimg { get; set; }
-        public Songs(string song, string lyric, string backimg)
+        public string Name { get; set; }
+        public Songs(string song, string lyric, string backimg,string name)
         {
             this.Song = song;
             this.Lyrics = lyric;
             this.Backimg = backimg;
+            this.Name = name;
         }
 
         public void Loadlyric()
         {
             string lyrictxt = this.Lyrics;
-            
+            Lyric curlyric;
             string[] lyrics = lyrictxt.Split(new string[] { "\\n" }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string lyric in lyrics)
             {
-                string[] foo = lyric.Split('[', ':', '.', ']');
-                Lyric curlyric;
-                if ((foo[1] != "") && (foo[2] != "") && (foo[3] != ""))
+                string[] foo = lyric.Split('[',']');//先把时间与歌词分割
+                string lyricpartial = foo[2];
+                string[] bar = foo[1].Split(':', '.');//再分割时间
+
+                if (bar.Length == 3)
                 {
-                    curlyric = new Lyric(int.Parse(foo[1]), int.Parse(foo[2]), int.Parse(foo[3]), foo[4]);
+                    curlyric = new Lyric(int.Parse(bar[0]), int.Parse(bar[1]), bar[2], foo[2]);
+                    lstLyric.Add(curlyric);
+                }
+                else
+                {
+                    curlyric = new Lyric(0, 0, "0", foo[1]);
                     lstLyric.Add(curlyric);
                 }
             }
@@ -59,7 +68,10 @@ namespace urltest01
             {
                 //全部化成double计算
                 //如果大于等于就返回歌词
-                time = lyric.Minute * 60 + lyric.Second + lyric.Mmsec * 0.01;
+                if (lyric.Mmsec.Length > 2)//歌词时间轴毫秒数区分
+                    time = lyric.Minute * 60 + lyric.Second + int.Parse(lyric.Mmsec) * 0.001;
+                else
+                    time = lyric.Minute * 60 + lyric.Second + int.Parse(lyric.Mmsec) * 0.01;
                 if (lyric != null)
                 {
                     if (time <= Curtime)
@@ -102,7 +114,7 @@ namespace urltest01
     }
     class Lyric
     {
-        public Lyric(int minute, int second, int mmsecs, string strlyric)
+        public Lyric(int minute, int second, string mmsecs, string strlyric)
         {
 
             this.Mmsec = mmsecs;
@@ -110,7 +122,7 @@ namespace urltest01
             this.Second = second;
             this.Strlyric = strlyric;
         }
-        public int Mmsec { get; set; }
+        public string Mmsec { get; set; }
         public int Minute { get; set; }
         public int Second { get; set; }
         public string Strlyric { get; set; }
